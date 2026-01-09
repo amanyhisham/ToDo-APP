@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Todo App</title>
+</head>
+<body>
+<div class="container">
+    
+    <div class="todolist">
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+         <h2>ToDo List</h2>
+         <!--   Search Area - شريط البحث -->
+        <div class="search-area">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Search tasks..." />
+        </div>
+         <!--   Progress Bar - شريط التقدم -->
+        <div class="progress-container">
+            <div class="progress-info">
+                <span id="progress-text">0 of 0 completed</span>
+                <span id="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <!--   Filter Buttons - أزرار الفلترة -->
+        <div class="filter-buttons">
+            <button class="active" data-filter="all">All Tasks</button>
+            <button data-filter="active">Active</button>
+            <button data-filter="completed">Completed</button>
+        </div>
+
+        <!--   Action Buttons - زر حذف المكتملة -->
+        <div class="action-buttons">
+            <button id="clear-completed">Clear Completed</button>
+        </div>
+        </div>
+        <div class="input-area">
+        <input type="text" id="todo-input" placeholder="Enter a new Task..">
+        <button id="submit" class="submit"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <div class="list-task">
+        <ul id="todo-list">
+        
+        </ul>
+        </div>
+
+    </div>
+     <div class="img">
+        <img src="img/To do list-cuate.svg" alt="Todo Image">
+    </div>
+ </div>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="script.js"></script> 
+</body>
+</html>

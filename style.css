@@ -1,0 +1,1090 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    height: 100vh;
+    font-family: 'Caveat', cursive;
+    background-color: #faf9f6;
+    /* خطوط أفقية متخططة زي الكشكول */
+    background-image: 
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 29px,
+            rgba(200, 200, 200, 0.15) 29px,
+            rgba(200, 200, 200, 0.15) 30px
+        );
+    position: relative;
+    overflow: hidden;
+}
+ body.dark-mode {
+            background-color: #1a1a1a;
+            background-image: 
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 29px,
+                    rgba(100, 100, 100, 0.15) 29px,
+                    rgba(100, 100, 100, 0.15) 30px
+                );
+        }
+
+        body.dark-mode .todolist {
+            background: #2d2d2d;
+            border-color: #ff6f91;
+            color: #fff;
+        }
+
+        body.dark-mode h2 {
+            color: #fff;
+        }
+
+        body.dark-mode .input-area input {
+            background: rgba(255, 194, 209, 0.2);
+            color: #fff;
+        }
+
+        body.dark-mode #todo-list li {
+            background: rgba(255, 194, 209, 0.15);
+            border-color: rgba(243, 166, 184, 0.5);
+        }
+
+        body.dark-mode .task-text {
+            color: #fff;
+        }
+
+        body.dark-mode .filter-buttons button,
+        body.dark-mode .action-buttons button {
+            background: rgba(255, 194, 209, 0.2);
+            color: #fff;
+        }
+
+        body.dark-mode .progress-info {
+            color: #fff;
+        }
+
+/* 📓 كراسة مفتوحة - الزاوية اليمنى العلوية */
+body::before {
+    content: '';
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    width: 90px;
+    height: 70px;
+    background: 
+        /* خط المنتصف */
+        linear-gradient(to right,
+            transparent 48%,
+            rgba(150, 150, 150, 0.25) 48%,
+            rgba(150, 150, 150, 0.25) 52%,
+            transparent 52%
+        ),
+        /* خطوط الصفحات */
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 9px,
+            rgba(150, 150, 150, 0.15) 9px,
+            rgba(150, 150, 150, 0.15) 10px
+        ),
+        rgba(245, 245, 240, 0.4);
+    border: 2.5px solid rgba(150, 150, 150, 0.25);
+    border-radius: 4px;
+    transform: rotate(-10deg);
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✏️ قلم رصاص - الزاوية اليسرى العلوية */
+body::after {
+    content: '';
+    position: fixed;
+    top: 3%;
+    left: 2%;
+    width: 120px;
+    height: 14px;
+    background: 
+        /* جسم القلم الخشبي */
+        linear-gradient(90deg, 
+            rgba(220, 190, 140, 0.3) 0%,
+            rgba(200, 170, 120, 0.3) 70%,
+            rgba(180, 150, 100, 0.3) 85%,
+            /* الجزء الرصاص */
+            rgba(80, 80, 80, 0.25) 85%,
+            rgba(60, 60, 60, 0.3) 95%,
+            transparent 100%
+        );
+    border-radius: 3px;
+    transform: rotate(40deg);
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    gap: 60px;
+    width: 90%;
+    max-width: 1100px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 📚 كومة كتب - الزاوية اليسرى السفلية */
+.container::before {
+    content: '';
+    position: fixed;
+    bottom: 3%;
+    left: 2%;
+    width: 65px;
+    height: 85px;
+    background: 
+        /* كتاب أحمر */
+        linear-gradient(to bottom,
+            rgba(220, 100, 100, 0.2) 0%,
+            rgba(220, 100, 100, 0.2) 28%,
+            transparent 28%,
+            transparent 30%,
+            /* كتاب أزرق */
+            rgba(100, 140, 220, 0.2) 30%,
+            rgba(100, 140, 220, 0.2) 58%,
+            transparent 58%,
+            transparent 60%,
+            /* كتاب أخضر */
+            rgba(120, 200, 120, 0.2) 60%,
+            rgba(120, 200, 120, 0.2) 100%
+        );
+    border: 2.5px solid rgba(150, 150, 150, 0.25);
+    border-radius: 3px;
+    transform: rotate(-5deg);
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📐 مسطرة - الزاوية اليمنى السفلية */
+.container::after {
+    content: '';
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    width: 20px;
+    height: 150px;
+    background: 
+        /* علامات القياس الكبيرة */
+        repeating-linear-gradient(
+            to bottom,
+            rgba(180, 180, 180, 0.2) 0px,
+            rgba(180, 180, 180, 0.2) 3px,
+            transparent 3px,
+            transparent 15px
+        ),
+        /* علامات القياس الصغيرة */
+        repeating-linear-gradient(
+            to bottom,
+            rgba(180, 180, 180, 0.12) 0px,
+            rgba(180, 180, 180, 0.12) 1.5px,
+            transparent 1.5px,
+            transparent 5px
+        ),
+        rgba(230, 230, 220, 0.3);
+    border: 2px solid rgba(150, 150, 150, 0.25);
+    border-radius: 3px;
+    transform: rotate(8deg);
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.img {
+    position: relative;
+}
+
+h2{
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.img img{
+    width: 450px;
+    max-width: 100%;
+    display: block;
+}
+
+.todolist{
+    width: 350px;
+    position: relative;
+}
+
+.input-area{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width:100%;
+    position: relative;
+}
+
+.input-area input{
+   flex:1;
+   padding: 10px 17px;
+   font-size: 1.1rem;
+    border: none;
+    outline: none;
+    background:rgb(255,194,209,0.3);
+    border-radius: 22px;
+    color:#333;
+}
+
+.input-area input::placeholder{
+    color: #bcbcbc;
+}
+
+.input-area .submit{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background:rgb(255,194,209);
+    color: #fff;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.input-area .submit:hover{
+    transform: scale(1.1);
+    background: #ff6f91; 
+}
+/* 🌙 زر Dark Mode - أعلى يمين التودو ليست */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 194, 209, 0.3);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255, 194, 209, 0.5);
+            transform: rotate(20deg);
+        }
+.todolist{
+    border: 2px solid #f3a6b8;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    width:100%;
+    max-width: 400px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+    background: #fff;
+}
+
+ /* قائمة التاسكات */
+.list-task {
+    width: 100%;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* تنسيق السكرول بار */
+.list-task::-webkit-scrollbar {
+    width: 4px;
+}
+
+.list-task::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.list-task::-webkit-scrollbar-thumb {
+    background: rgba(255, 194, 209, 0.5);
+    border-radius: 10px;
+}
+
+#todo-list {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* شكل التاسك - الصف الكامل */
+#todo-list li {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 194, 209, 0.25);
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    gap: 12px;
+    transition: all 0.3s ease;
+    border: 1.5px solid rgba(243, 166, 184, 0.3);
+}
+
+#todo-list li:hover {
+    background: rgba(255, 194, 209, 0.35);
+    transform: translateX(-1.8px);
+}
+
+ .task-checkbox {
+    width: 12px;              
+    height: 12px;             
+    min-width: 12px;          
+    border: 2px solid #ff6f91;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    background: #fff;
+}
+
+.task-checkbox:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 8px rgba(255, 111, 145, 0.3);
+}
+
+ .task-checkbox.checked {
+    background: #ff6f91;
+    border-color: #ff6f91;
+}
+
+ .task-checkbox.checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 10px;        /* كان 12px */
+    font-weight: bold;
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ff6f91;
+    border-radius: 50%;   /* ده يخليه دائرة */
+    cursor: pointer;
+    position: relative;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.task-checkbox.checked {
+    background: #ff6f91;
+}
+
+ 
+ .task-text {
+    flex: 1;
+    color: #333;
+    font-size: 1.1rem;
+    word-break: break-word;
+    transition: all 0.3s ease;
+}
+
+ #todo-list li.completed .task-text {
+    text-decoration: line-through;
+    color: #999;
+    opacity: 0.7;
+}
+
+ .task-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.task-actions i {
+    cursor: pointer;
+    color: #ff6f91;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    padding: 5px;
+}
+
+.task-actions i:hover {
+    transform: scale(1.25);
+    color: #ff4d7a;
+}
+
+ .task-actions .fa-pen:hover {
+    color: #4a90ff;
+}
+
+ .task-actions .fa-trash:hover {
+    color: #ff4d4d;
+}
+/* ⚠️ منع التعديل على التاسكات المكتملة */
+        #todo-list li.completed .fa-pen {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+.task-text[contenteditable="true"] {
+    outline: none;   /* إزالة الحدود الافتراضية */
+    border: none;    /* إزالة أي حدود */
+    
+}
+  
+/* 📊 Progress Bar - شريط التقدم */
+        .progress-container {
+            width: 100%;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 194, 209, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6f91, #ff4d7a);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+/* 🔍 Search Bar - شريط البحث */
+        .search-area {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 194, 209, 0.2);
+            border-radius: 22px;
+            padding: 8px 15px;
+            gap: 10px;
+        }
+
+        .search-area input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 1rem;
+            color: #333;
+            font-family: 'Caveat', cursive;
+        }
+
+        .search-area input::placeholder {
+            color: #bcbcbc;
+        }
+
+        .search-area i {
+            color: #ff6f91;
+        }
+ /* Filter Buttons - أزرار الفلترة */
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 194, 209, 0.3);
+            color: #333;
+            font-size: 0.95rem;
+            font-family: 'Caveat', cursive;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-buttons button:hover {
+            background: rgba(255, 194, 209, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .filter-buttons button.active {
+            background: #ff6f91;
+            color: #fff;
+        }
+
+         .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .action-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 100, 100, 0.3);
+            color: #333;
+            font-size: 0.95rem;
+            font-family: 'Caveat', cursive;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-buttons button:hover {
+            background: rgba(255, 100, 100, 0.5);
+            transform: translateY(-2px);
+        }
+
+ /* 📱 Responsive Design - Media Queries */
+
+/* شاشات التابلت والشاشات المتوسطة */
+@media (max-width: 992px) {
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .img {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .img img {
+        width: 350px;
+    }
+
+    .todolist {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    /* تصغير العناصر الديكورية */
+    body::before {
+        width: 70px;
+        height: 55px;
+    }
+
+    body::after {
+        width: 100px;
+        height: 12px;
+    }
+
+    .container::before {
+        width: 50px;
+        height: 65px;
+    }
+
+    .container::after {
+        height: 120px;
+    }
+}
+
+/* شاشات الموبايل الكبيرة */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        padding: 30px 0;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 30px;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .img img {
+        width: 280px;
+        margin: 0 auto;
+    }
+
+    .todolist {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .input-area input {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+
+    .input-area .submit {
+        width: 22px;
+        height: 22px;
+        margin-left: 10px;
+    }
+
+    .list-task {
+        max-height: 300px;
+    }
+
+    /* تنسيق السكرول بار للموبايل */
+    .list-task::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .list-task::-webkit-scrollbar-track {
+        background: rgba(255, 194, 209, 0.1);
+        border-radius: 10px;
+    }
+
+    .list-task::-webkit-scrollbar-thumb {
+        background: rgba(255, 194, 209, 0.6);
+        border-radius: 10px;
+    }
+
+    .list-task::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 111, 145, 0.8);
+    }
+
+    #todo-list li {
+        font-size: 1rem;
+        padding: 8px 12px;
+        gap: 10px;
+    }
+
+    .task-text {
+        font-size: 1rem;
+    }
+
+    .task-actions i {
+        font-size: 14px;
+    }
+
+    /* إخفاء العناصر الديكورية على الموبايل */
+    body::before,
+    body::after,
+    .container::before,
+    .container::after {
+        display: none;
+    }
+}
+
+/* شاشات الموبايل الصغيرة */
+@media (max-width: 480px) {
+    body {
+        padding: 20px 0;
+    }
+
+    .container {
+        gap: 25px;
+        padding: 10px;
+        width: 95%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    .img {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .img img {
+        width: 220px;
+        margin: 0 auto;
+    }
+
+    .todolist {
+        width: 95%;
+        max-width: 95%;
+        padding: 12px;
+        gap: 20px;
+        margin: 0 auto;
+    }
+
+    .input-area input {
+        font-size: 0.95rem;
+        padding: 7px 12px;
+    }
+
+    .input-area .submit {
+        width: 20px;
+        height: 20px;
+        font-size: 0.9rem;
+    }
+
+    .dark-mode-toggle {
+        width: 30px;
+        height: 30px;
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+    }
+
+    .list-task {
+        max-height: 250px;
+    }
+
+    /* السكرول بار للشاشات الصغيرة */
+    .list-task::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    #todo-list li {
+        font-size: 0.95rem;
+        padding: 7px 10px;
+        gap: 8px;
+    }
+
+    .task-checkbox {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+    }
+
+    .task-checkbox.checked::after {
+        font-size: 9px;
+    }
+
+    .task-text {
+        font-size: 0.95rem;
+    }
+
+    .task-actions {
+        gap: 8px;
+    }
+
+    .task-actions i {
+        font-size: 13px;
+        padding: 3px;
+    }
+
+    .progress-info {
+        font-size: 0.9rem;
+    }
+
+    .progress-bar {
+        height: 10px;
+    }
+}
+
+/* شاشات صغيرة جداً */
+@media (max-width: 360px) {
+    body {
+        padding: 15px 0;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .img img {
+        width: 180px;
+    }
+
+    .todolist {
+        width: 98%;
+        padding: 10px;
+    }
+
+    #todo-list li {
+        font-size: 0.9rem;
+    }
+
+    .task-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* شاشات الديسكتوب الكبيرة */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1300px;
+        gap: 80px;
+    }
+
+    .img img {
+        width: 500px;
+    }
+
+    .todolist {
+        width: 420px;
+    }
+}
+
+ 
+
+/* 📱 Responsive Design - Media Queries */
+
+/* شاشات التابلت والشاشات المتوسطة */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 20px;
+    }
+
+    .img img {
+        width: 350px;
+    }
+
+    .todolist {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    /* تصغير العناصر الديكورية */
+    body::before {
+        width: 70px;
+        height: 55px;
+    }
+
+    body::after {
+        width: 100px;
+        height: 12px;
+    }
+
+    .container::before {
+        width: 50px;
+        height: 65px;
+    }
+
+    .container::after {
+        height: 120px;
+    }
+}
+
+/* شاشات الموبايل الكبيرة */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .img img {
+        width: 280px;
+    }
+
+    .todolist {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .input-area input {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+
+    .input-area .submit {
+        width: 22px;
+        height: 22px;
+        margin-left: 10px;
+    }
+
+    .list-task {
+        max-height: 300px;
+    }
+
+    #todo-list li {
+        font-size: 1rem;
+        padding: 8px 12px;
+        gap: 10px;
+    }
+
+    .task-text {
+        font-size: 1rem;
+    }
+
+    .task-actions i {
+        font-size: 14px;
+    }
+
+    /* إخفاء العناصر الديكورية على الموبايل */
+    body::before,
+    body::after,
+    .container::before,
+    .container::after {
+        display: none;
+    }
+}
+
+/* شاشات الموبايل الصغيرة */
+@media (max-width: 480px) {
+    .container {
+        gap: 25px;
+        padding: 15px;
+        width: 95%;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    .img img {
+        width: 220px;
+    }
+
+    .todolist {
+        padding: 12px;
+        gap: 20px;
+    }
+
+    .input-area input {
+        font-size: 0.95rem;
+        padding: 7px 12px;
+    }
+
+    .input-area .submit {
+        width: 20px;
+        height: 20px;
+        font-size: 0.9rem;
+    }
+
+    .dark-mode-toggle {
+        width: 30px;
+        height: 30px;
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+    }
+
+    .list-task {
+        max-height: 250px;
+    }
+
+    #todo-list li {
+        font-size: 0.95rem;
+        padding: 7px 10px;
+        gap: 8px;
+    }
+
+    .task-checkbox {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+    }
+
+    .task-checkbox.checked::after {
+        font-size: 9px;
+    }
+
+    .task-text {
+        font-size: 0.95rem;
+    }
+
+    .task-actions {
+        gap: 8px;
+    }
+
+    .task-actions i {
+        font-size: 13px;
+        padding: 3px;
+    }
+
+    .progress-info {
+        font-size: 0.9rem;
+    }
+
+    .progress-bar {
+        height: 10px;
+    }
+}
+
+/* شاشات صغيرة جداً */
+@media (max-width: 360px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .img img {
+        width: 180px;
+    }
+
+    .todolist {
+        padding: 10px;
+    }
+
+    #todo-list li {
+        font-size: 0.9rem;
+    }
+
+    .task-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* شاشات الديسكتوب الكبيرة */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1300px;
+        gap: 80px;
+    }
+
+    .img img {
+        width: 500px;
+    }
+
+    .todolist {
+        width: 420px;
+    }
+}
