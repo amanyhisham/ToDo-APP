@@ -1087,4 +1087,8 @@ h2{
     .todolist {
         width: 420px;
     }
+
+}
+.task-text {
+    font-size: 1.5rem;
 }
