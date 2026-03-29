@@ -1,36 +1,60 @@
-📝 ToDo List App
 
-A clean and responsive ToDo List web application built using HTML, CSS, and JavaScript.
-It helps users manage their daily tasks بسهولة with a simple and intuitive interface.
+# 🛍️ MyBrand — E-commerce Fashion Store
 
-🚀 Live Demo
+A fully responsive **E-commerce web application** for a fashion brand, built with **HTML**, **CSS**, and **JavaScript**.
 
-🔗 https://amanyhisham.github.io/ToDo-APP/
+---
 
-✨ Features
-➕ Add new tasks
-✏️ Edit existing tasks
-❌ Delete tasks
-🔍 Real-time search
-📂 Filter tasks (All / Active / Completed)
-🧹 Clear completed tasks in one click
-📊 Progress tracker (e.g., "2 of 5 completed — 40%")
-🌙 Dark mode toggle
-💾 Data persistence using localStorage
-🛠️ Built With
-HTML5
-CSS3
-Vanilla JavaScript
-📁 Project Structure
-ToDo-APP/
+## 🚀 Live Demo
+
+🔗 [View Live](https://amanyhisham.github.io/MyBrand_Ecommerce/)
+
+---
+
+## ✨ Features
+
+- 🏠 Hero section with call-to-action "Shop Now" button
+- 🧭 Navigation bar with: Home, About, Products, Sales, Contact
+- ❤️ Wishlist icon with item counter
+- 🛒 Shopping cart icon with item counter
+- 👤 User account button
+- 📦 Products page with fashion items
+- 🔖 Sales / Discounts section
+- 📱 Fully responsive design (mobile & desktop)
+
+---
+
+## 🛠️ Built With
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+
+---
+
+## 📁 Project Structure
+
+```
+MyBrand_Ecommerce/
 ├── index.html
 ├── style.css
 ├── script.js
+├── assets/
+│   └── images/
 └── README.md
-🧑‍💻 Getting Started
+```
 
-Clone the repository:
+---
 
-git clone https://github.com/amanyhisham/ToDo-APP.git
-Navigate to the project folder
-Open index.html in your browser
+## 🧑‍💻 How to Use
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/amanyhisham/MyBrand_Ecommerce.git
+   ```
+2. Open `index.html` in your browser.
+3. Browse products and explore the store!
+
+---
+
+> Made with ❤️ by [Amany Hisham](https://github.com/amanyhisham)
