@@ -4,12 +4,7 @@
 A fully responsive **E-commerce web application** for a fashion brand, built with **HTML**, **CSS**, and **JavaScript**.
 
 ---
-
-## 🚀 Live Demo
-
-🔗 [View Live](https://amanyhisham.github.io/MyBrand_Ecommerce/)
-
----
+ 
 
 ## ✨ Features
 
