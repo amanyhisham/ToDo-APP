@@ -1,69 +1,29 @@
+📝 ToDo List App
 
-# 📝 ToDo List App
+A simple and responsive ToDo List web application built using HTML, CSS, and JavaScript.
+It helps users manage daily tasks بسهولة مع واجهة نظيفة وسهلة الاستخدام.
 
-A clean and responsive **ToDo List** web application built with **HTML**, **CSS**, and **JavaScript**.
+🚀 Live Demo
 
----
+🔗 https://amanyhisham.github.io/ToDo-APP/
 
-## 🚀 Live Demo
-
-🔗 [View Live](https://amanyhisham.github.io/ToDo-APP/)
-
----
-
-## ✨ Features
-
-- ✅ Add, edit, and delete tasks
-- 🔍 Search tasks in real time
-- 📂 Filter tasks: All / Active / Completed
-- 🧹 Clear all completed tasks at once
-- 📊 Progress tracker (e.g. "0 of 3 completed — 0%")
-- 🌙 Dark mode toggle
-- 💾 Tasks saved in localStorage (no data lost on refresh)
-
----
-
-## 🛠️ Built With
-
-- HTML5
-- CSS3
-- Vanilla JavaScript
-
----
-
-## 📸 Screenshot
-
-![ToDo App Screenshot](screenshot.png)
-
----
-
-## 📁 Project Structure
-
-```
+✨ Features
+➕ Add new tasks بسهولة
+✏️ Edit existing tasks
+❌ Delete tasks
+🔍 Real-time search
+📂 Filter tasks (All / Active / Completed)
+🧹 Clear completed tasks in one click
+📊 Progress tracker لعرض نسبة الإنجاز
+🌙 Dark mode toggle
+💾 حفظ البيانات باستخدام localStorage
+🛠️ Built With
+HTML5
+CSS3
+Vanilla JavaScript
+📁 Project Structure
 ToDo-APP/
 ├── index.html
 ├── style.css
 ├── script.js
 └── README.md
-```
-
----
-
-## 🧑‍💻 How to Use
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/amanyhisham/ToDo-APP.git
-   ```
-2. Open `index.html` in your browser.
-3. Start adding your tasks!
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-> Made with ❤️ by [Amany Hisham](https://github.com/amanyhisham)
